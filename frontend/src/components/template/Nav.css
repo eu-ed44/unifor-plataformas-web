@@ -1,5 +1,16 @@
-aside.menu-area {
-    grid-area: menu;
-    background-color: #222;
+.menu a {
+    display: block;
+    padding: 15px;
     color: #fff;
+    text-decoration: none;
+    font-weight: 300;
+}
+
+.menu a:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.menu i {
+    margin-right: 10px;
 }

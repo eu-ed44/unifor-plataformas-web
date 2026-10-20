@@ -3,5 +3,7 @@ import React from 'react'
 
 export default props =>
     <footer className="footer">
-        Aqui será inserido o rodapé
+        <span>
+            Desenvolvido com <i className="fa fa-heart text-danger"></i> por <strong>UNIFOR</strong>
+        </span>
     </footer>
