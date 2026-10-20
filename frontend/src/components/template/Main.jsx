@@ -1,7 +1,13 @@
 import './Main.css'
 import React from 'react'
+import Header from './Header'
 
 export default props =>
-    <main className="content">
-        Aqui será inserido o conteúdo principal
-    </main>
+    <React.Fragment>
+        <Header {...props} />
+        <main className="content container-fluid">
+            <div>
+                {props.children}
+            </div>
+        </main>
+    </React.Fragment>
