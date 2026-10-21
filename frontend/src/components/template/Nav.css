@@ -1,3 +1,9 @@
+aside.menu-area {
+    grid-area: menu;
+    background-color: #222;
+    color: #fff;
+}
+
 .menu a {
     display: block;
     padding: 15px;
