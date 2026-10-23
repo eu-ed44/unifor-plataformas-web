@@ -1,0 +1,11 @@
+{
+  "pratos": [
+    {
+      "nome": "Galinha Caipira",
+      "descricao": "Arroz, Feijão de Corda, salada, batata",
+      "preco": "16.50",
+      "id": "l4GGKSZ6ZXY"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
