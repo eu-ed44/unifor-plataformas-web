@@ -14,7 +14,7 @@ O sistema consiste em uma interface Web dinâmica que consome um serviço Web pr
 
 ## 👥 Equipe
 * [Nome do Integrante 1] - Matrícula: [0000000]
-* [Nome do Integrante 2] - Matrícula: [0000000]
+* [Lucas Gondim Sampaio Sales] - Matrícula: [2514951]
 * [Nome do Integrante 3] - Matrícula: [0000000]
 * [Nome do Integrante 4] - Matrícula: [0000000]
 * [Nome do Integrante 5] - Matrícula: [0000000]
