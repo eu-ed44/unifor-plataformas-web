@@ -13,7 +13,7 @@ O sistema consiste em uma interface Web dinâmica que consome um serviço Web pr
 * **Comunicação HTTP:** Axios
 
 ## 👥 Equipe
-* [Nome do Integrante 1] - Matrícula: [0000000]
+* [Edcarlos de Sousa Rodrigues] - Matrícula: [2524970]
 * [Lucas Gondim Sampaio Sales] - Matrícula: [2514951]
 * [Nome do Integrante 3] - Matrícula: [0000000]
 * [Nome do Integrante 4] - Matrícula: [0000000]
