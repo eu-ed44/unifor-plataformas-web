@@ -12,7 +12,8 @@ const baseUrl = 'http://localhost:3001/pratos'
 
 const initialState = {
     prato: { nome: '', descricao: '', preco: '' },
-    list: []
+    list: [],
+    error: null
 }
 
 export default class UserCrud extends Component {
@@ -21,13 +22,20 @@ export default class UserCrud extends Component {
 
     // 1. CARREGAR DADOS: Assim que a página abre, vai buscar os pratos à base de dados
     componentDidMount() {
-        axios(baseUrl).then(resp => {
-            this.setState({ list: resp.data })
-        })
+        axios(baseUrl)
+            .then(resp => {
+                this.setState({ list: resp.data, error: null })
+            })
+            .catch(err => {
+                console.error('Erro ao carregar pratos da API:', err)
+                this.setState({
+                    error: 'Não foi possível conectar ao servidor (porta 3001). Verifique se a API está em execução.'
+                })
+            })
     }
 
     clear() {
-        this.setState({ prato: { ...initialState.prato } })
+        this.setState({ prato: { ...initialState.prato }, error: null })
     }
 
     save() {
@@ -38,7 +46,13 @@ export default class UserCrud extends Component {
         axios[method](url, prato)
             .then(resp => {
                 const list = this.getUpdatedList(resp.data)
-                this.setState({ prato: { ...initialState.prato }, list })
+                this.setState({ prato: { ...initialState.prato }, list, error: null })
+            })
+            .catch(err => {
+                console.error('Erro ao salvar prato:', err)
+                this.setState({
+                    error: 'Não foi possível salvar o prato. Verifique a conexão com a API.'
+                })
             })
     }
 
@@ -58,15 +72,22 @@ export default class UserCrud extends Component {
 
     // 2. CARREGAR PARA EDIÇÃO: Põe os dados da linha clicada de volta no formulário
     load(prato) {
-        this.setState({ prato: { ...prato } })
+        this.setState({ prato: { ...prato }, error: null })
     }
 
     // 3. APAGAR: Remove o prato da base de dados e do ecrã
     remove(prato) {
-        axios.delete(`${baseUrl}/${prato.id}`).then(resp => {
-            const list = this.state.list.filter(p => p.id !== prato.id)
-            this.setState({ list })
-        })
+        axios.delete(`${baseUrl}/${prato.id}`)
+            .then(() => {
+                const list = this.state.list.filter(p => p.id !== prato.id)
+                this.setState({ list, error: null })
+            })
+            .catch(err => {
+                console.error('Erro ao remover prato:', err)
+                this.setState({
+                    error: 'Não foi possível remover o prato. Verifique a conexão com a API.'
+                })
+            })
     }
 
     renderForm() {
@@ -103,10 +124,10 @@ export default class UserCrud extends Component {
                 
                 <div className="row">
                     <div className="col-12 d-flex justify-content-end">
-                        <button className="btn btn-primary" onClick={e => this.save()}>
+                        <button className="btn btn-primary" onClick={() => this.save()}>
                             Salvar Prato
                         </button>
-                        <button className="btn btn-secondary ml-2" onClick={e => this.clear()}>
+                        <button className="btn btn-secondary ml-2" onClick={() => this.clear()}>
                             Cancelar
                         </button>
                     </div>
@@ -160,6 +181,11 @@ export default class UserCrud extends Component {
     render() {
         return (
             <Main {...headerProps}>
+                {this.state.error && (
+                    <div className="alert alert-danger" role="alert">
+                        {this.state.error}
+                    </div>
+                )}
                 {this.renderForm()}
                 {this.renderTable()}
             </Main>
