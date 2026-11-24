@@ -5,6 +5,12 @@
       "descricao": "Arroz, Feijão de Corda, salada, batata",
       "preco": "16.50",
       "id": "l4GGKSZ6ZXY"
+    },
+    {
+      "nome": "Frango Assado (completo)",
+      "descricao": "Frango Assado (crocante), Farofa, maionese, Vinagrete",
+      "preco": "39.90",
+      "id": "oW6qoK8P_UU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
