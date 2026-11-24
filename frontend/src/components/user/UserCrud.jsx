@@ -20,14 +20,14 @@ export default class UserCrud extends Component {
     state = { ...initialState }
 
     // 1. CARREGAR DADOS: Assim que a página abre, vai buscar os pratos à base de dados
-    componentWillMount() {
+    componentDidMount() {
         axios(baseUrl).then(resp => {
             this.setState({ list: resp.data })
         })
     }
 
     clear() {
-        this.setState({ prato: initialState.prato })
+        this.setState({ prato: { ...initialState.prato } })
     }
 
     save() {
@@ -38,25 +38,27 @@ export default class UserCrud extends Component {
         axios[method](url, prato)
             .then(resp => {
                 const list = this.getUpdatedList(resp.data)
-                this.setState({ prato: initialState.prato, list })
+                this.setState({ prato: { ...initialState.prato }, list })
             })
     }
 
     getUpdatedList(prato) {
-        const list = this.state.list.filter(p => p.id !== prato.id)
-        list.unshift(prato)
-        return list
+        return [prato, ...this.state.list.filter(p => p.id !== prato.id)]
     }
 
     updateField = (event) => {
-        const prato = { ...this.state.prato }
-        prato[event.target.name] = event.target.value
-        this.setState({ prato })
+        const { name, value } = event.target
+        this.setState(prevState => ({
+            prato: {
+                ...prevState.prato,
+                [name]: value
+            }
+        }))
     }
 
     // 2. CARREGAR PARA EDIÇÃO: Põe os dados da linha clicada de volta no formulário
     load(prato) {
-        this.setState({ prato })
+        this.setState({ prato: { ...prato } })
     }
 
     // 3. APAGAR: Remove o prato da base de dados e do ecrã
