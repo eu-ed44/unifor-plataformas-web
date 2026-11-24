@@ -1,11 +1,39 @@
 {
-  "pratos": [
+  "categorias": [
     {
-      "nome": "Frango Assado (Completo)",
-      "descricao": "Frango Assado (Crocante), Farofa, Maionese, Vinagrete",
-      "preco": "39.90",
-      "id": "ZHBTgWw4cdQ"
+      "id": "1",
+      "nome": "Executivas"
+    },
+    {
+      "id": "2",
+      "nome": "Fitness"
+    },
+    {
+      "id": "3",
+      "nome": "Tradicionais"
     }
   ],
-  "$schema": "./node_modules/json-server/schema.json"
+  "pratos": [
+    {
+      "id": "1",
+      "categoriaId": "1",
+      "nome": "Frango Grelhado",
+      "descricao": "Arroz, feijão, purê de batata e salada",
+      "preco": 22.5
+    },
+    {
+      "id": "2",
+      "categoriaId": "2",
+      "nome": "Tilápia com Legumes",
+      "descricao": "Arroz integral, filé de tilápia e mix de legumes no vapor",
+      "preco": 26.0
+    },
+    {
+      "id": "3",
+      "categoriaId": "3",
+      "nome": "Bife Acebolado",
+      "descricao": "Arroz branco, feijão carioca, batata frita e vinagrete",
+      "preco": 24.0
+    }
+  ]
 }
