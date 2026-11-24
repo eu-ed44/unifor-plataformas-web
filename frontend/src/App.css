@@ -1,3 +1,4 @@
+/* Layout base para Desktop */
 .app {
     margin: 0;
     display: grid;
@@ -29,4 +30,45 @@ main.content {
 
 footer.footer {
     grid-area: footer;
+}
+
+/* Ajuste responsivo para ecrãs até 768px (Telemóvel e Tablet) */
+@media (max-width: 768px) {
+    .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto 1fr auto;
+        grid-template-areas:
+            "logo"
+            "header"
+            "menu"
+            "content"
+            "footer";
+    }
+
+    header.header {
+        padding: 12px 16px;
+        white-space: normal;
+    }
+
+    header.header h1 {
+        font-size: 1.4rem;
+    }
+
+    header.header p {
+        font-size: 0.85rem;
+    }
+
+    aside.menu-area .menu {
+        display: flex;
+    }
+
+    aside.menu-area .menu a {
+        flex: 1;
+        text-align: center;
+        padding: 10px 12px;
+    }
+
+    main.content {
+        overflow-x: auto;
+    }
 }
