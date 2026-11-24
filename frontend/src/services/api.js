@@ -46,10 +46,10 @@ export const pratoService = {
   },
 
   listarPorCategoria: async (categoriaId) => {
-    const response = await api.get('/pratos', {
-      params: { categoriaId: String(categoriaId) }
-    });
-    return response.data;
+    const response = await api.get('/pratos');
+    return response.data.filter(
+      (prato) => String(prato.categoriaId) === String(categoriaId)
+    );
   },
 
   criar: async (prato) => {
