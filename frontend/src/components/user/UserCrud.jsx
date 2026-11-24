@@ -40,10 +40,27 @@ export default class UserCrud extends Component {
 
     save() {
         const prato = this.state.prato
-        const method = prato.id ? 'put' : 'post'
-        const url = prato.id ? `${baseUrl}/${prato.id}` : baseUrl
+        const nomeLimpo = String(prato.nome || '').trim()
+        const precoTexto = String(prato.preco ?? '').trim()
+        const precoNumero = Number(precoTexto)
 
-        axios[method](url, prato)
+        if (!nomeLimpo || !precoTexto || Number.isNaN(precoNumero) || precoNumero <= 0) {
+            this.setState({
+                error: 'Preencha o nome da marmita e um preço válido maior que zero antes de salvar.'
+            })
+            return
+        }
+
+        const payload = {
+            ...prato,
+            nome: nomeLimpo,
+            preco: precoTexto
+        }
+
+        const method = payload.id ? 'put' : 'post'
+        const url = payload.id ? `${baseUrl}/${payload.id}` : baseUrl
+
+        axios[method](url, payload)
             .then(resp => {
                 const list = this.getUpdatedList(resp.data)
                 this.setState({ prato: { ...initialState.prato }, list, error: null })
@@ -138,6 +155,16 @@ export default class UserCrud extends Component {
 
     // 4. DESENHAR LINHAS DINÂMICAS: Percorre a memória (state.list) e cria uma linha para cada prato
     renderRows() {
+        if (!this.state.list || this.state.list.length === 0) {
+            return (
+                <tr>
+                    <td colSpan="5" className="text-center">
+                        Nenhum prato cadastrado no cardápio
+                    </td>
+                </tr>
+            )
+        }
+
         return this.state.list.map(prato => {
             return (
                 <tr key={prato.id}>
