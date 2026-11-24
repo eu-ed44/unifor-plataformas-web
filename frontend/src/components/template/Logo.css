@@ -1,8 +1,19 @@
+/* Header.css */
+header.header {
+    background-color: #ffffff;
+    padding: 0 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: 4px solid #FFB300;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Logo.css */
 aside.logo {
-    grid-area: logo;
-    background-color: #222;
+    background-color: #212529;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
 }
