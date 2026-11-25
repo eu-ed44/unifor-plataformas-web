@@ -27,8 +27,8 @@ Sistema Web para gestão de **Cardápio Digital** (marmitaria) com relacionament
 ## 👥 Equipe
 - Edcarlos de Sousa Rodrigues - Matrícula: 2524970
 - Lucas Gondim Sampaio Sales - Matrícula: 2514951
-- [Nome do Integrante 3] - Matrícula: [0000000]
-- [Nome do Integrante 4] - Matrícula: [0000000]
+- David Moraes Costa - Matrícula: 2524967
+- Danillo Castro de Sousa - Matrícula: 2523562
 
 ## 🚀 Como executar o projeto localmente
 
