@@ -15,25 +15,26 @@
   ],
   "pratos": [
     {
-      "id": "1",
       "categoriaId": "1",
       "nome": "Frango Grelhado",
       "descricao": "Arroz, feijão, purê de batata e salada",
-      "preco": 22.5
+      "preco": 22.5,
+      "id": "1"
     },
     {
       "id": "2",
       "categoriaId": "2",
       "nome": "Tilápia com Legumes",
       "descricao": "Arroz integral, filé de tilápia e mix de legumes no vapor",
-      "preco": 26.0
+      "preco": 26
     },
     {
       "id": "3",
       "categoriaId": "3",
       "nome": "Bife Acebolado",
       "descricao": "Arroz branco, feijão carioca, batata frita e vinagrete",
-      "preco": 24.0
+      "preco": 24
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
