@@ -1,8 +1,8 @@
 {
   "categorias": [
     {
-      "nome": "Executivas",
-      "id": "1"
+      "id": "1",
+      "nome": "Executivas"
     },
     {
       "id": "2",
@@ -13,17 +13,17 @@
       "nome": "Tradicionais"
     },
     {
-      "nome": "salada",
-      "id": "Ams2sUEmKiY"
+      "id": "Ams2sUEmKiY",
+      "nome": "salada"
     }
   ],
   "pratos": [
     {
+      "id": "1",
       "categoriaId": "1",
       "nome": "Frango Grelhado",
       "descricao": "Arroz, feijão, purê de batata e salada",
-      "preco": 22.5,
-      "id": "1"
+      "preco": 22.5
     },
     {
       "id": "2",
@@ -40,11 +40,11 @@
       "preco": 24
     },
     {
+      "id": "u8KTJDnllQw",
       "categoriaId": "Ams2sUEmKiY",
       "nome": "Salada Caesar",
       "descricao": "Alface Americana, Peito de Frango, Parmesão, Crutons, Azeite",
-      "preco": 19.9,
-      "id": "u8KTJDnllQw"
+      "preco": 19.9
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

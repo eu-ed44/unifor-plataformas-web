@@ -45,12 +45,14 @@ function gerarProximoId(itens = []) {
   return String(maiorId + 1);
 }
 
-export default function PratoCrud({ categoriaSelecionadaId }) {
+export default function PratoCrud({ categoriaInicialId, categoriaSelecionadaId }) {
+  const idCategoriaRota = categoriaInicialId ?? categoriaSelecionadaId;
+
   const [prato, setPrato] = useState(estadoInicial);
   const [pratos, setPratos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [filtroCategoriaId, setFiltroCategoriaId] = useState(
-    categoriaSelecionadaId ? String(categoriaSelecionadaId) : ''
+    idCategoriaRota ? String(idCategoriaRota) : ''
   );
   const [mensagemErro, setMensagemErro] = useState('');
   const [mensagemSucesso, setMensagemSucesso] = useState('');
@@ -73,12 +75,16 @@ export default function PratoCrud({ categoriaSelecionadaId }) {
 
       setPrato((prev) => {
         if (prev.categoriaId) return prev;
-        const primeiraCatId = cats[0]?.id ? String(cats[0].id) : '';
-        return { ...prev, categoriaId: primeiraCatId };
+        const categoriaPadrao = idCategoriaRota
+          ? String(idCategoriaRota)
+          : cats[0]?.id
+            ? String(cats[0].id)
+            : '';
+        return { ...prev, categoriaId: categoriaPadrao };
       });
     } catch {
       setMensagemErro(
-        'Não foi possível carregar os pratos ou categorias. Verifica se a API está ativa na porta 3001.'
+        'Não foi possível carregar os pratos ou categorias. Verifica se a API está ativa.'
       );
     } finally {
       setCarregando(false);
@@ -87,29 +93,28 @@ export default function PratoCrud({ categoriaSelecionadaId }) {
 
   useEffect(() => {
     carregarDados();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (categoriaSelecionadaId !== undefined && categoriaSelecionadaId !== null) {
-      setFiltroCategoriaId(String(categoriaSelecionadaId));
+    const novoFiltro = idCategoriaRota ? String(idCategoriaRota) : '';
+    setFiltroCategoriaId(novoFiltro);
+    if (novoFiltro) {
+      setPrato((prev) => (prev.id ? prev : { ...prev, categoriaId: novoFiltro }));
     }
-  }, [categoriaSelecionadaId]);
+  }, [idCategoriaRota]);
 
   function limparFormulario() {
-    const padraoCatId = categorias[0]?.id ? String(categorias[0].id) : '';
+    const padraoCatId = filtroCategoriaId || (categorias[0]?.id ? String(categorias[0].id) : '');
     setPrato({ ...estadoInicial, categoriaId: padraoCatId });
     setMensagemErro('');
   }
 
   function obterNomeCategoria(pratoItem) {
-    const idAlvo = pratoItem.categoriaId ?? pratoItem.categoria;
     const encontrada = categorias.find(
-      (cat) =>
-        String(cat.id) === String(idAlvo) ||
-        String(cat.nome).toLowerCase() === String(idAlvo || '').toLowerCase()
+      (cat) => String(cat.id) === String(pratoItem.categoriaId)
     );
-    if (encontrada) return encontrada.nome;
-    return typeof pratoItem.categoria === 'string' ? pratoItem.categoria : '-';
+    return encontrada ? encontrada.nome : '-';
   }
 
   async function guardarPrato(e) {
@@ -119,7 +124,8 @@ export default function PratoCrud({ categoriaSelecionadaId }) {
     const nomeLimpo = prato.nome.trim();
     const descricaoLimpa = prato.descricao.trim();
     const precoNumero = parsePreco(prato.preco);
-    const categoriaIdEscolhida = prato.categoriaId || (categorias[0]?.id ? String(categorias[0].id) : '');
+    const categoriaIdEscolhida =
+      prato.categoriaId || (categorias[0]?.id ? String(categorias[0].id) : '');
     const isEditando = Boolean(prato.id);
 
     if (!categoriaIdEscolhida) {
@@ -181,21 +187,12 @@ export default function PratoCrud({ categoriaSelecionadaId }) {
 
   function editarPrato(item) {
     const valorNumerico = parsePreco(item.preco);
-    const catEncontrada = categorias.find(
-      (cat) =>
-        String(cat.id) === String(item.categoriaId) ||
-        String(cat.nome).toLowerCase() === String(item.categoria || '').toLowerCase()
-    );
 
     setMensagemErro('');
     setMensagemSucesso('');
     setPrato({
       id: item.id,
-      categoriaId: catEncontrada
-        ? String(catEncontrada.id)
-        : item.categoriaId
-          ? String(item.categoriaId)
-          : '',
+      categoriaId: item.categoriaId ? String(item.categoriaId) : '',
       nome: item.nome || '',
       preco: Number.isNaN(valorNumerico) ? '' : valorNumerico.toFixed(2).replace('.', ','),
       descricao: item.descricao || ''
@@ -218,13 +215,7 @@ export default function PratoCrud({ categoriaSelecionadaId }) {
   }
 
   const pratosFiltrados = filtroCategoriaId
-    ? pratos.filter((p) => {
-        const cat = categorias.find((c) => String(c.id) === String(filtroCategoriaId));
-        return (
-          String(p.categoriaId) === String(filtroCategoriaId) ||
-          (cat && String(p.categoria || '').toLowerCase() === String(cat.nome).toLowerCase())
-        );
-      })
+    ? pratos.filter((p) => String(p.categoriaId) === String(filtroCategoriaId))
     : pratos;
 
   return (
