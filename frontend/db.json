@@ -13,38 +13,38 @@
       "nome": "Tradicionais"
     },
     {
-      "id": "Ams2sUEmKiY",
-      "nome": "salada"
+      "nome": "Saladas",
+      "id": "Ams2sUEmKiY"
     }
   ],
   "pratos": [
-    {
-      "id": "1",
-      "categoriaId": "1",
-      "nome": "Frango Grelhado",
-      "descricao": "Arroz, feijão, purê de batata e salada",
-      "preco": 22.5
-    },
-    {
-      "id": "2",
-      "categoriaId": "2",
-      "nome": "Tilápia com Legumes",
-      "descricao": "Arroz integral, filé de tilápia e mix de legumes no vapor",
-      "preco": 26
-    },
-    {
-      "id": "3",
-      "categoriaId": "3",
-      "nome": "Bife Acebolado",
-      "descricao": "Arroz branco, feijão carioca, batata frita e vinagrete",
-      "preco": 24
-    },
     {
       "id": "u8KTJDnllQw",
       "categoriaId": "Ams2sUEmKiY",
       "nome": "Salada Caesar",
       "descricao": "Alface Americana, Peito de Frango, Parmesão, Crutons, Azeite",
       "preco": 19.9
+    },
+    {
+      "categoriaId": "1",
+      "nome": "Frango Grelhado",
+      "descricao": "Arroz, feijão, purê de batata, salada e suco do dia",
+      "preco": 22.5,
+      "id": "EsiLQcshEGM"
+    },
+    {
+      "categoriaId": "2",
+      "nome": "Tilapia com legumes",
+      "descricao": "Arroz integral, filé de tilápia e mix de legumes no vapor",
+      "preco": 26.5,
+      "id": "CpU8cJVSCyw"
+    },
+    {
+      "categoriaId": "3",
+      "nome": "Bife acebolado",
+      "descricao": "Arroz, feijão carioca, batata frita e vinagrete",
+      "preco": 24,
+      "id": "j9L-sBl-ZLo"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

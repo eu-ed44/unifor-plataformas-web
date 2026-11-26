@@ -224,25 +224,6 @@ export default function PratoCrud({ categoriaInicialId, categoriaSelecionadaId }
       title="Pratos"
       subtitle="Gestão de Pratos: incluir, listar, alterar e excluir pratos!"
     >
-      <div className="mb-3">
-        <label htmlFor="filtroCategoria" className="form-label fw-bold">
-          Filtrar por Categoria
-        </label>
-        <select
-          id="filtroCategoria"
-          className="form-select"
-          value={filtroCategoriaId}
-          onChange={(e) => setFiltroCategoriaId(e.target.value)}
-        >
-          <option value="">Todas as categorias</option>
-          {categorias.map((cat) => (
-            <option key={cat.id} value={String(cat.id)}>
-              {cat.nome}
-            </option>
-          ))}
-        </select>
-      </div>
-
       <form onSubmit={guardarPrato} className="mb-4">
         <div className="row g-3 mb-3">
           <div className="col-12 col-md-4">
@@ -336,10 +317,33 @@ export default function PratoCrud({ categoriaInicialId, categoriaSelecionadaId }
         </div>
       </form>
 
+      <hr />
+
+      <div className="row align-items-end g-2 mb-3">
+        <div className="col-12 col-sm-6 col-md-4">
+          <label htmlFor="filtroCategoria" className="form-label fw-bold mb-1">
+            Filtrar por Categoria
+          </label>
+          <select
+            id="filtroCategoria"
+            className="form-select"
+            value={filtroCategoriaId}
+            onChange={(e) => setFiltroCategoriaId(e.target.value)}
+          >
+            <option value="">Todas as categorias</option>
+            {categorias.map((cat) => (
+              <option key={cat.id} value={String(cat.id)}>
+                {cat.nome}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
       {carregando ? (
         <p>A carregar pratos...</p>
       ) : (
-        <div className="table-responsive mt-4">
+        <div className="table-responsive">
           <table className="table mb-0 align-middle" style={{ minWidth: '640px' }}>
             <thead>
               <tr className="text-nowrap">
