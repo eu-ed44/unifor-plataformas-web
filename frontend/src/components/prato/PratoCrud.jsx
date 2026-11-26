@@ -339,10 +339,10 @@ export default function PratoCrud({ categoriaInicialId, categoriaSelecionadaId }
       {carregando ? (
         <p>A carregar pratos...</p>
       ) : (
-        <div className="table-responsive">
-          <table className="table mt-4 align-middle">
+        <div className="table-responsive mt-4">
+          <table className="table mb-0 align-middle" style={{ minWidth: '640px' }}>
             <thead>
-              <tr>
+              <tr className="text-nowrap">
                 <th>ID</th>
                 <th>Categoria</th>
                 <th>Nome</th>
@@ -361,12 +361,12 @@ export default function PratoCrud({ categoriaInicialId, categoriaSelecionadaId }
               ) : (
                 pratosFiltrados.map((item) => (
                   <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{obterNomeCategoria(item)}</td>
-                    <td>{item.nome}</td>
-                    <td>{item.descricao}</td>
-                    <td>{formatarMoeda(item.preco)}</td>
-                    <td>
+                    <td className="text-nowrap">{item.id}</td>
+                    <td className="text-nowrap">{obterNomeCategoria(item)}</td>
+                    <td className="text-nowrap">{item.nome}</td>
+                    <td style={{ minWidth: '220px' }}>{item.descricao}</td>
+                    <td className="text-nowrap">{formatarMoeda(item.preco)}</td>
+                    <td className="text-nowrap">
                       <button
                         type="button"
                         className="btn btn-warning btn-sm me-2"

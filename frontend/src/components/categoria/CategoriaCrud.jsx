@@ -24,7 +24,7 @@ export default function CategoriaCrud({ onSelecionarCategoria }) {
       setCategorias(listaCategorias);
       setPratos(listaPratos);
     } catch {
-      setMensagemErro('Não foi possível carregar as categorias. Verifica se a API está ativa na porta 3001.');
+      setMensagemErro('Não foi possível carregar as categorias. Verifica se a API está ativa.');
     } finally {
       setCarregando(false);
     }
@@ -129,11 +129,11 @@ export default function CategoriaCrud({ onSelecionarCategoria }) {
         )}
 
         <hr />
-        <div className="d-flex justify-content-end">
+        <div className="d-flex flex-wrap justify-content-end gap-2">
           <button type="submit" className="btn btn-primary">
             {categoria.id ? 'Atualizar Categoria' : 'Salvar Categoria'}
           </button>
-          <button type="button" className="btn btn-secondary ms-2" onClick={limparFormulario}>
+          <button type="button" className="btn btn-secondary" onClick={limparFormulario}>
             Cancelar
           </button>
         </div>
@@ -142,58 +142,60 @@ export default function CategoriaCrud({ onSelecionarCategoria }) {
       {carregando ? (
         <p>A carregar categorias...</p>
       ) : (
-        <table className="table mt-4">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Qtd. de Pratos</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {categorias.length === 0 ? (
-              <tr>
-                <td colSpan="4" className="text-center">
-                  Nenhuma categoria cadastrada.
-                </td>
+        <div className="table-responsive mt-4">
+          <table className="table mb-0 align-middle" style={{ minWidth: '520px' }}>
+            <thead>
+              <tr className="text-nowrap">
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Qtd. de Pratos</th>
+                <th>Ações</th>
               </tr>
-            ) : (
-              categorias.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.nome}</td>
-                  <td>{contarPratos(item.id)}</td>
-                  <td>
-                    {onSelecionarCategoria && (
-                      <button
-                        type="button"
-                        className="btn btn-info btn-sm me-2"
-                        onClick={() => onSelecionarCategoria(item.id)}
-                      >
-                        Ver Pratos
-                      </button>
-                    )}
-                    <button
-                      type="button"
-                      className="btn btn-warning btn-sm me-2"
-                      onClick={() => editarCategoria(item)}
-                    >
-                      <i className="fa fa-pencil" />
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-danger btn-sm"
-                      onClick={() => removerCategoria(item)}
-                    >
-                      <i className="fa fa-trash" />
-                    </button>
+            </thead>
+            <tbody>
+              {categorias.length === 0 ? (
+                <tr>
+                  <td colSpan="4" className="text-center">
+                    Nenhuma categoria cadastrada.
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : (
+                categorias.map((item) => (
+                  <tr key={item.id}>
+                    <td className="text-nowrap">{item.id}</td>
+                    <td className="text-nowrap">{item.nome}</td>
+                    <td className="text-nowrap">{contarPratos(item.id)}</td>
+                    <td className="text-nowrap">
+                      {onSelecionarCategoria && (
+                        <button
+                          type="button"
+                          className="btn btn-info btn-sm me-2"
+                          onClick={() => onSelecionarCategoria(item.id)}
+                        >
+                          Ver Pratos
+                        </button>
+                      )}
+                      <button
+                        type="button"
+                        className="btn btn-warning btn-sm me-2"
+                        onClick={() => editarCategoria(item)}
+                      >
+                        <i className="fa fa-pencil" />
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-danger btn-sm"
+                        onClick={() => removerCategoria(item)}
+                      >
+                        <i className="fa fa-trash" />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       )}
     </Main>
   );
