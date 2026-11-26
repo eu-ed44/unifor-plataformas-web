@@ -7,7 +7,7 @@ import Nav from './components/template/Nav'
 import Routes from './Routes'
 import Footer from './components/template/Footer'
 
-export default props => (
+const App = props => (
     <BrowserRouter>
         <div className="app">
             <Logo />
@@ -17,3 +17,5 @@ export default props => (
         </div>
     </BrowserRouter>
 )
+
+export default App

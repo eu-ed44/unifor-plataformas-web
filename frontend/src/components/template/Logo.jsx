@@ -2,7 +2,7 @@ import './Logo.css'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default props =>
+const Logo = props => (
     <aside className="logo d-flex justify-content-center align-items-center py-3">
         <Link to="/" className="logo text-decoration-none d-flex flex-column align-items-center">
             <img
@@ -19,3 +19,6 @@ export default props =>
             </small>
         </Link>
     </aside>
+)
+
+export default Logo
