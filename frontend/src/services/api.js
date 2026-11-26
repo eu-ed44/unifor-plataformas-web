@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_URL = (
+  process.env.REACT_APP_API_URL || 'http://localhost:3001'
+).replace(/\/+$/, '');
 
 const api = axios.create({
   baseURL: API_URL,
@@ -22,14 +24,14 @@ export const categoriaService = {
 
   criar: async (categoria) => {
     const response = await api.post('/categorias', {
-      nome: categoria.nome.trim()
+      nome: (categoria.nome || '').trim()
     });
     return response.data;
   },
 
   atualizar: async (id, categoria) => {
     const response = await api.put(`/categorias/${id}`, {
-      nome: categoria.nome.trim()
+      nome: (categoria.nome || '').trim()
     });
     return response.data;
   },
@@ -55,8 +57,8 @@ export const pratoService = {
   criar: async (prato) => {
     const response = await api.post('/pratos', {
       categoriaId: String(prato.categoriaId),
-      nome: prato.nome.trim(),
-      descricao: prato.descricao.trim(),
+      nome: (prato.nome || '').trim(),
+      descricao: (prato.descricao || '').trim(),
       preco: Number(prato.preco)
     });
     return response.data;
@@ -65,8 +67,8 @@ export const pratoService = {
   atualizar: async (id, prato) => {
     const response = await api.put(`/pratos/${id}`, {
       categoriaId: String(prato.categoriaId),
-      nome: prato.nome.trim(),
-      descricao: prato.descricao.trim(),
+      nome: (prato.nome || '').trim(),
+      descricao: (prato.descricao || '').trim(),
       preco: Number(prato.preco)
     });
     return response.data;
