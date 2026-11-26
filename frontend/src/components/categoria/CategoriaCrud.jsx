@@ -5,6 +5,16 @@ import { podeExcluirCategoria, validarCategoria } from '../../services/cardapioR
 
 const estadoInicial = { id: null, nome: '' };
 
+function gerarIdAleatorio(tamanho = 11) {
+  const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let resultado = '';
+  for (let i = 0; i < tamanho; i += 1) {
+    const indice = Math.floor(Math.random() * letras.length);
+    resultado += letras[indice];
+  }
+  return resultado;
+}
+
 export default function CategoriaCrud({ onSelecionarCategoria }) {
   const [categoria, setCategoria] = useState(estadoInicial);
   const [categorias, setCategorias] = useState([]);
@@ -52,12 +62,23 @@ export default function CategoriaCrud({ onSelecionarCategoria }) {
     setMensagemErro('');
     try {
       if (categoria.id) {
-        const atualizada = await categoriaService.atualizar(categoria.id, categoria);
-        setCategorias((prev) => prev.map((item) => (item.id === atualizada.id ? atualizada : item)));
+        const payloadAtualizacao = {
+          id: categoria.id,
+          nome: categoria.nome.trim()
+        };
+        const atualizada = await categoriaService.atualizar(categoria.id, payloadAtualizacao);
+        setCategorias((prev) =>
+          prev.map((item) => (String(item.id) === String(atualizada.id) ? atualizada : item))
+        );
         setMensagemSucesso('Categoria atualizada com sucesso.');
       } else {
-        const criada = await categoriaService.criar(categoria);
-        setCategorias((prev) => [...prev, criada]);
+        const payloadCriacao = {
+          id: gerarIdAleatorio(11),
+          nome: categoria.nome.trim()
+        };
+        const criada = await categoriaService.criar(payloadCriacao);
+        const registroFinal = criada?.id ? criada : payloadCriacao;
+        setCategorias((prev) => [...prev, registroFinal]);
         setMensagemSucesso('Categoria cadastrada com sucesso.');
       }
       setCategoria(estadoInicial);
@@ -83,8 +104,8 @@ export default function CategoriaCrud({ onSelecionarCategoria }) {
     setMensagemErro('');
     try {
       await categoriaService.excluir(item.id);
-      setCategorias((prev) => prev.filter((cat) => cat.id !== item.id));
-      if (categoria.id === item.id) {
+      setCategorias((prev) => prev.filter((cat) => String(cat.id) !== String(item.id)));
+      if (String(categoria.id) === String(item.id)) {
         setCategoria(estadoInicial);
       }
       setMensagemSucesso('Categoria removida com sucesso.');

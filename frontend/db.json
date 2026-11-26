@@ -1,15 +1,15 @@
 {
   "categorias": [
     {
-      "id": "1",
+      "id": "kRpxLmQvBnT",
       "nome": "Executivas"
     },
     {
-      "id": "2",
+      "id": "wZyXcVbNmKl",
       "nome": "Fitness"
     },
     {
-      "id": "3",
+      "id": "pQrStUvWxYz",
       "nome": "Tradicionais"
     },
     {
@@ -26,21 +26,21 @@
       "preco": 19.9
     },
     {
-      "categoriaId": "1",
+      "categoriaId": "kRpxLmQvBnT",
       "nome": "Frango Grelhado",
       "descricao": "Arroz, feijão, purê de batata, salada e suco do dia",
       "preco": 22.5,
       "id": "EsiLQcshEGM"
     },
     {
-      "categoriaId": "2",
+      "categoriaId": "wZyXcVbNmKl",
       "nome": "Tilapia com legumes",
       "descricao": "Arroz integral, filé de tilápia e mix de legumes no vapor",
       "preco": 26.5,
       "id": "CpU8cJVSCyw"
     },
     {
-      "categoriaId": "3",
+      "categoriaId": "pQrStUvWxYz",
       "nome": "Bife acebolado",
       "descricao": "Arroz, feijão carioca, batata frita e vinagrete",
       "preco": 24,
